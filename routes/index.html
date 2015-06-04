@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+  </head>
+  <body>
+    <form action="action_page.php" method="POST">
+     <input id="messages" type="text" name="messages" readonly>
+   <!--  <form action="" >
+      <input id="name" type="text" name="firstname" value="name"> <br> <br>
+        <input id="number" type="text" name="mobile" value="number"> <br><br>
+     <button>Send</button> -->
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+       
+      var socket = io({query:{username:"shrivatsa",phone:"0000000000"}});
+      socket.on('call', function(msg){
+                $('#messages').val(msg);
+                //setTimeout($('#messages').val(""),3000);
+  
+      });
+
+      
+      
+    </script>
+  </body>
+</html>
