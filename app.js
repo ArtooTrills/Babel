@@ -1,5 +1,9 @@
 var app = require('express')();
+var bodyParser = require('body-parser');
 var http = require('http').Server(app);
+
+app.use(bodyParser.json()); // for parsing application/json
+
 var io = require('socket.io')(http);
 
 process.io = io;
@@ -17,13 +21,14 @@ io.on('connection', function(socket){
   	username: socket.handshake.query["username"],
   	phone: socket.handshake.query["phone"]
   };
+
   console.log(params);
   socket.join(params.phone);
   // setTimeout(function() {
   //  	io.to("999999999").emit("call","Incoming!!! Pick up your phone, " + params.username);
   //  },500);
-  console.log('a user connected');
-});
+
+});  
 
 http.listen(3000, function(){
   console.log('listening on *:3000');

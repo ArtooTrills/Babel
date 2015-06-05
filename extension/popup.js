@@ -8,6 +8,9 @@ function clickHandler(e) {
   else if (Notification.permission === "granted") {
     // If it's okay let's create a notification
     var notification = new Notification("Hi there!");
+    $.get("http://localhost:3000",function(data) {
+      document.getElementById('click-me').innerHTML = JSON.stringify(data);
+    });
   }
 
   // Otherwise, we need to ask the user for permission
@@ -31,3 +34,10 @@ function clickHandler(e) {
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('click-me').addEventListener('click', clickHandler);
 })
+
+function socketConn() {
+  var socket = io("http://localhost:3000",{query:{username:"shrivatsa",phone:"11111111111111"}});          
+  socket.on("call", function(msg){
+    $('#messages').append($('<li>').text(msg));
+  });
+};

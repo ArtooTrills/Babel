@@ -43,11 +43,72 @@ var Freshdesk = (function(superClass) {
   };
 
   Freshdesk.prototype.createTicket = function(body, query) {
+    var d = Q.defer();
+
+    if(typeof body === "string") {
+      body = JSON.parse(body);
+    }
+
+    var data = { helpdesk_ticket: {}, helpdesk: {}};
+
+    data.helpdesk_ticket.description = body.text;
+    data.helpdesk_ticket.subject = body.text.length < 25 ? body.text : body.text.slice(0,25);
+    data.helpdesk_ticket.email = body.user.email || (body.user.username + "@" + body.org + ".com");
+    data.helpdesk_ticket.phone = body.user.phone;
+    data.helpdesk_ticket.name = body.user.name;
+    data.helpdesk_ticket.priority = 1;
+    data.helpdesk_ticket.status = 2;
+    data.helpdesk.tags = "ujjivan,moo,foo";//[{name:"ujjivan"},{name:"sync"}];
+
+    console.log(data);
+
+    request.post({
+        url:"https://NkTfioCOtqIuW2r0MrAh:X@artoo.freshdesk.com/helpdesk/tickets.json",
+        body: data,
+        json:true
+      }, function(error, response, json) {
+        console.log(json);
+        // json into artoo json
+
+        
+        d.resolve(json);
+    });
+
+    return d.promise;
 
   };
 
   Freshdesk.prototype.updateTicket = function(body, query) {
+    var d = Q.defer();
 
+    if(typeof body === "string") {
+      body = JSON.parse(body);
+    }
+
+    var data = { helpdesk_ticket: {}, helpdesk: {}, helpdesk_note:{}};
+    
+    data.helpdesk_ticket.priority = 2;
+    data.helpdesk_ticket.status = 2;
+
+    data.helpdesk_note.body = body.text;
+    data.helpdesk_note.private = false;
+    
+    console.log(data);
+
+    request.put({
+        //pass query param as no , and that ticket wil be updated 
+        url:"https://NkTfioCOtqIuW2r0MrAh:X@artoo.freshdesk.com/helpdesk/tickets/" + body.id +"  .json",
+        body: data,
+        json:true
+      }, function(error, response, json) {
+        console.log(json);
+        // json into artoo json
+
+        
+        d.resolve(json);
+    });
+
+    return d.promise;
   };
 
   return Freshdesk;

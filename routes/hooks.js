@@ -18,7 +18,7 @@ var processRequest = function(req, res, next) {
 
     } else {
 
-      res.status(400).send({error: "Uknown service: " + req.params.service});
+      res.status(400).send({error: "Unknown service: " + req.params.service});
 
     }
 

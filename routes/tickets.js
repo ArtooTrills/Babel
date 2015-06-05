@@ -10,8 +10,8 @@ var processRequest = function(fn, req, res, next) {
 
       var module = new Module();
       fn = module[fn];
-      
-      fn.call(req.body, req.query)
+
+      fn.call(this, req.body, req.query)
         .done(function(json) {
           res.status(200).send(json);
         }, function(err) {

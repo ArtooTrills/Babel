@@ -7,9 +7,9 @@
         "default_popup": "popup.html"
     },
     "background": {
-        "scripts": ["/socket.io.js", "background.js"]
+        "scripts": ["background.js"]
     },
     "permissions": [
-        "tabs", "http://*/*", "https://*/*","https://cdnjs.cloudflare.com"
+        "tabs", "http://*/*", "https://*/*"
     ]
 }
