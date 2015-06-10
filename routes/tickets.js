@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var processRequest = function(fn, req, res, next) {
+  console.log(fn);
+
   try {
 
     //CORS to be disabled
