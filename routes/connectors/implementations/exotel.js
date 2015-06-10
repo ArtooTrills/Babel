@@ -11,20 +11,34 @@ var extend = function(child, parent) { for (var key in parent)
     hasProp = {}.hasOwnProperty;
 
 var CallConnector = require("../call-connector");
+var usernames = require("../../../app");
 
 var Exotel = (function(superClass) {
   extend(Exotel, superClass);
 
   function Exotel() {
-    console.log(arguments);
+    
     return Exotel.__super__.constructor.apply(this, arguments);
   }
 
   Exotel.prototype.parseCall = function(body, query) {
 
-    // VALID_PARAMS = ["CallSid","From","DialWhomNumber","Status"];
   
+
   	if(query.CallSid && query.From && query.DialWhomNumber && query.Status) {
+      console.log(query);
+      //console.log("username : " + usernames['partha']);
+
+       if(typeof usernames['SS'] === 'undefined') 
+        {console.log("undefined number : " + query.DialWhomNumber);
+      
+            }
+       else 
+        {
+          console.log("agent online");
+         
+            console.log("exotel socket connected");
+            
   		return {
   			callId: query.CallSid,
   			user: {
@@ -33,13 +47,15 @@ var Exotel = (function(superClass) {
   			agent: {
           phone: query.DialWhomNumber
         }
-  			// we don't know what to do with status
-  		};
-  	} else {
+
+  		};}}
+  	 else {
   		throw new Error("Expecting CallSid, From, DialWhomNumber and Status in query params");
   	}
 
   };
+
+
 
   return Exotel;
 

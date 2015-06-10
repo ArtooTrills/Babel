@@ -1,39 +1,49 @@
-chrome.extension.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        
-        switch (request.directive) {
-        case "popup-click":
-            // execute the content script
-            chrome.tabs.executeScript(null, { // defaults to the current tab
-                file: "contentscript.js", // script to inject into page and run in sandbox
-                allFrames: true // This injects script into iframes in the page and doesn't work before 4.0.266.0.
-            });
-            sendResponse({}); // sending back empty response to sender
-            break;
-        default:
-            // helps debug when request directive doesn't match
-            alert("Unmatched request of '" + request + "' from script to background.js from " + sender);
-        } 
-    }
-       
-);
+
+function popup(){
+  cuteLittleWindow = window.open("popupwindow.html", "littleWindow", "location=no,width=320,height=200"); 
+}
 
 
-var message;
+// function getAgentDetails()
+// {cuteLittleWindow = window.open("agentdetails.html", "littleWindow", "location=no,width=320,height=200");
+// }
 
-chrome.windows.onCreated.addListener(function() {
-       //alert("looks very good ");
-
-        var socket = io.connect('http://localhost:3000/',{query:{username:"partha",phone:"0000000000"}});
-        socket.on('connection', function(msg){
-                //$message.val(msg);
-                //alert(msg);
+chrome.tabs.onCreated.addListener(function() {
+      
+      var socket = io.connect('http://localhost:3000/',{query:{username:"partha",phone:"0000000000"}});
+      socket.on('connection', function(msg){
+                //alert(socket.connected);
+                
                 });
       
 
-        extension();   
-          });
+        //extension();  
 
+      socket.on('call',function(data) {extension();
+        popup();});
+
+      
+      
+      
+     // socket.on('call',function(data) {alert('works')});        
+
+
+      //   sockets.on('connect', function(){
+
+      //     socket.on('call', function(){
+      //   alert('calll to be attended');
+      //     //alert("inside");
+      //         socket.emit('adduser','SS','7829721707');
+      //         //alert('connection established');
+      //        socket.on('showExtn',function(data){
+      //            alert('hii');
+      //             //popup();
+      //         // createTicket();
+      //            });
+      //   } );
+
+      // });
+      });
 
 function extension()
 {chrome.extension.sendMessage( {directive: "popup-click"}, function(response) {
@@ -43,7 +53,7 @@ function extension()
                   // Let's check whether notification permissions have alredy been granted  
                   else if (Notification.permission === "granted") {
                     // If it's okay let's create a notification
-                    var notification = new Notification("Hi there!");
+                    var notification = new Notification("Incoming Call !");
                   }
 
                   // Otherwise, we need to ask the user for permission
@@ -55,5 +65,5 @@ function extension()
                       }
                     });
                   }
-                 this.close(); // close the popup when the background finishes processing request
+                 //this.close(); // close the popup when the background finishes processing request
                     } );}

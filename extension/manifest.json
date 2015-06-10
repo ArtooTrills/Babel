@@ -7,9 +7,10 @@
         "default_popup": "popup.html"
     },
     "background": {
-        "scripts": ["background.js"]
+        "scripts": ["background.js","socket.io.js","contentscript.js","popupwindow.js"]
+        // dont remove the socket import from the above line 
     },
     "permissions": [
-        "tabs", "http://*/*", "https://*/*"
+        "tabs"
     ]
 }

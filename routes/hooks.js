@@ -1,20 +1,26 @@
 var express = require('express');
 var router = express.Router();
 
+
+
 var processRequest = function(req, res, next) {
   try {
 
+
+    res.header("Access-Control-Allow-Origin", "*");
     var Module = require("./connectors/implementations/" + req.params.service);
     
     if(Module) {
 
       var module = new Module();
-      var data = module.parseCall(req.body, req.query);
-      res.status(200).send();
+      try{var data = module.parseCall(req.body, req.query);
+      res.status(200).send();}
+      catch(e) {console.log(e.trace);}
+
+      //console.log(req.query.DialWhomNumber);
+
 
       // fetch extra data -- org, name, username, roles, contexts, etc
-
-      process.io.to(data.agent.phone).emit("call","Incoming call !! ");
 
     } else {
 

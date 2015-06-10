@@ -47,15 +47,19 @@ var Freshdesk = (function(superClass) {
 
     if(typeof body === "string") {
       body = JSON.parse(body);
+      
     }
+    else console.log(body);
 
     var data = { helpdesk_ticket: {}, helpdesk: {}};
 
-    data.helpdesk_ticket.description = body.text;
-    data.helpdesk_ticket.subject = body.text.length < 25 ? body.text : body.text.slice(0,25);
-    data.helpdesk_ticket.email = body.user.email || (body.user.username + "@" + body.org + ".com");
-    data.helpdesk_ticket.phone = body.user.phone;
-    data.helpdesk_ticket.name = body.user.name;
+    data.helpdesk_ticket.description = body.description;
+    data.helpdesk_ticket.subject = body.subject;
+    //length < 25 ? body.text : body.text.slice(0,25);
+    data.helpdesk_ticket.email = body.email;
+    // || (body.user.username + "@" + body.org + ".com");
+    data.helpdesk_ticket.phone = body.phone;
+    data.helpdesk_ticket.name = body.name;
     data.helpdesk_ticket.priority = 1;
     data.helpdesk_ticket.status = 2;
     data.helpdesk.tags = "ujjivan,moo,foo";//[{name:"ujjivan"},{name:"sync"}];

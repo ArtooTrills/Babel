@@ -35,9 +35,3 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('click-me').addEventListener('click', clickHandler);
 })
 
-function socketConn() {
-  var socket = io("http://localhost:3000",{query:{username:"shrivatsa",phone:"11111111111111"}});          
-  socket.on("call", function(msg){
-    $('#messages').append($('<li>').text(msg));
-  });
-};
