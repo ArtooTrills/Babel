@@ -1,3 +1,6 @@
+var JSONStream = require('JSONStream');
+var es = require ('event-stream');
+
 var extend = function(child, parent) { for (var key in parent) 
     { if (hasProp.call(parent, key)) child[key] = parent[key]; } 
 
@@ -11,7 +14,9 @@ var extend = function(child, parent) { for (var key in parent)
     hasProp = {}.hasOwnProperty;
 
 var CallConnector = require("../call-connector");
-var usernames = require("../../../app");
+var io = require("../../../app")
+
+
 
 var Exotel = (function(superClass) {
   extend(Exotel, superClass);
@@ -23,32 +28,27 @@ var Exotel = (function(superClass) {
 
   Exotel.prototype.parseCall = function(body, query) {
 
-  
-
-  	if(query.CallSid && query.From && query.DialWhomNumber && query.Status) {
-      console.log(query);
-      //console.log("username : " + usernames['partha']);
-
-       if(typeof usernames['SS'] === 'undefined') 
-        {console.log("undefined number : " + query.DialWhomNumber);
-      
-            }
-       else 
-        {
-          console.log("agent online");
+    console.log('query' + JSON.stringify(query));
          
-            console.log("exotel socket connected");
-            
+  	if(query.CallSid && query.CallFrom && query.DialWhomNumber && query.CallStatus) {
+      //callsid needs to be unique for the notification to be sent to the browser
+      
+
+      if(query.CallFrom=='7829721707')
+      io.in('7829721707').emit('call',query.CallFrom);
+      else 
+      io.in('0000000000').emit('call',query.CallFrom);
+          
   		return {
   			callId: query.CallSid,
   			user: {
-          phone: query.From
+          phone: query.CallFrom
         },
   			agent: {
-          phone: query.DialWhomNumber
+          phone: query.CallTo
         }
 
-  		};}}
+  		};}
   	 else {
   		throw new Error("Expecting CallSid, From, DialWhomNumber and Status in query params");
   	}

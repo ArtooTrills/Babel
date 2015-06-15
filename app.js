@@ -29,33 +29,46 @@ app.use('/', routes);
 app.use('/hooks', hooks);
 app.use('/tickets', tickets);
  
-var usernames = [];
+
+var usernames = {};
+
+
+var name = 'partha';
+process.name = name;
+
+process.usernames = usernames;
+
 io.on('connection', function(socket){
-  var params = {
-  	username: socket.handshake.query["username"],
-  	phone: socket.handshake.query["phone"]
+  var params = {   
+  	username: socket.handshake.query.username,
+  	phone: socket.handshake.query.mobile
   };
 
   console.log(params);
 
+  socket.join(params.phone); //adding the support person to list 
+
   //if(usernames['partha'] == socket.handshake.query["username"])
    io.on('adduser', function(data){
     console.log('user add');
-       // we store the username in the socket session for this client
-    socket.username = username;
-    //socket.phone = mobile;
-    
-    // add the client's username to the global list
-    usernames.push(username);
+    // usernames[]; 
     console.log(0,usernames);
   });
+  // getInfo()
+  // getInfo()-> mothership (nos){} || if nos is "12239" json {username: nos: details: } send json
+  // promise after call
+  
+  //io.emit('call','SS');  
 
-  io.emit('call','SS');
 });
+
+
+
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 
 
-module.exports = usernames;
+
+module.exports = io;

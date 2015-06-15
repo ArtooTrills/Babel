@@ -7,9 +7,16 @@
         "default_popup": "popup.html"
     },
     "background": {
-        "scripts": ["background.js","socket.io.js","popupwindow.js"]
+        "scripts": ["background.js","jquery-latest.min.js","socket.io.js","popupwindow.js"]
         // dont remove the socket import from the above line 
     },
+    "content_scripts": [
+    {
+      "matches": ["https://artoo.freshdesk.com/*","http://artoo.freshdesk.com/*"],
+      "js": ["content_script.js"]
+    }
+  ],
+
     "permissions": [
         "tabs"
     ]

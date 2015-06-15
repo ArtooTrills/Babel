@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {  
-	document.getElementById('create_ticket').addEventListener('click',createTicket());
+	$("#create_ticket").on('click',createTicket);  //there is no () when createTicket is called . 
+  createConn(); 
       
 });
 
@@ -26,3 +27,40 @@ document.addEventListener('DOMContentLoaded', function () {
   return response ;
 
 };
+
+
+function createConn()
+{
+  var temp,username,mobile;
+
+
+console.log('content working');
+
+  $.get('userID.json', function(data) {
+  temp = JSON.parse(data);
+  console.log(temp.userid[0].name);
+  // username="\""+temp.userid[0].name+"\"";
+  // mobile="\""+temp.userid[0].mobile+"\"";
+  username=temp.userid[0].name;
+  mobile=temp.userid[0].mobile;
+
+      var socket = io.connect('http://localhost:3000/',{query:{username,mobile}});
+
+      socket.on('connection', function(msg){
+      alert('connected');});
+      
+
+      socket.on('disconnected', function(msg){
+      // [todo] - set disconnected icon 
+        });
+
+      socket.on('call',function(data) {
+      extension(data);
+      popup();
+      });
+
+  
+  });
+
+  
+}
