@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {  
+document.addEventListener('DOMContentLoaded', function () { 
+  saveUserId();
 	$("#create_ticket").on('click',createTicket);  //there is no () when createTicket is called . 
   createConn(); 
       
@@ -6,43 +7,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
  function createTicket()
 {
-	console.log("create ticket");
-	var data ;
-  
-    //alert('create');
-    data = {"description":"Details about the issue...","subject":"Support Needed...","email":"tom@outerspace.com","phone":"58348758345","name":"partha","priority":1,"status":2};
+    	console.log("create ticket");
+    	var data ;
+      data = {"description":"Details about the issue...","subject":"Support Needed...","email":"tom@outerspace.com","phone":"58348758345","name":"partha","priority":1,"status":2};
 
-    console.log(data);
+        console.log(data);
 
 
-  var xhr = new XMLHttpRequest();
-	var url = "http://localhost:3000/tickets/freshdesk";
-	xhr.open("POST", url,true);
-	xhr.setRequestHeader('Content-Type', 'application/json');
+      var xhr = new XMLHttpRequest();
+    	var url = "http://localhost:3000/tickets/freshdesk";
+    	xhr.open("POST", url,true);
+    	xhr.setRequestHeader('Content-Type', 'application/json');
 
-  // send the collected data as JSON
-  var response = xhr.send(JSON.stringify(data));
-  console.log(JSON.stringify(data));
+      // send the collected data as JSON
+      var response = xhr.send(JSON.stringify(data));
+      console.log(JSON.stringify(data));
 
-  return response ;
+      return response ;
 
 };
 
 
 function createConn()
 {
-  var temp,username,mobile;
+      var temp,username,mobile;
 
 
-console.log('content working');
+      console.log('content working');
 
-  $.get('userID.json', function(data) {
-  temp = JSON.parse(data);
-  console.log(temp.userid[0].name);
-  // username="\""+temp.userid[0].name+"\"";
-  // mobile="\""+temp.userid[0].mobile+"\"";
-  username=temp.userid[0].name;
-  mobile=temp.userid[0].mobile;
+      $.get('userID.json', function(data) {
+      temp = JSON.parse(data);
+      console.log(temp.userid[0].name);
+      // username="\""+temp.userid[0].name+"\"";
+      // mobile="\""+temp.userid[0].mobile+"\"";
+      username=temp.userid[0].name;
+      mobile=temp.userid[0].mobile;
 
       var socket = io.connect('http://localhost:3000/',{query:{username,mobile}});
 

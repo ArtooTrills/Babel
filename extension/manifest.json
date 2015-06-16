@@ -12,12 +12,12 @@
     },
     "content_scripts": [
     {
-      "matches": ["https://artoo.freshdesk.com/*","http://artoo.freshdesk.com/*"],
-      "js": ["content_script.js"]
+      "matches": ["https://artoo.freshdesk.com/helpdesk/tickets/*","http://artoo.freshdesk.com/*","https://twilix.exotel.in/*"],
+      "js": ["jquery-latest.min.js","content_script.js"]
     }
   ],
 
     "permissions": [
-        "tabs"
+        "tabs","storage"
     ]
 }

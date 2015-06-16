@@ -4,8 +4,25 @@ function popup(){
 }
 
 chrome.tabs.onCreated.addListener(function() {
-
+  
 });
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.method == "getLocalStorage")
+      sendResponse({data: localStorage[request.key]});
+});
+
+function saveUserId(){
+    $.get('userID.json', function(data) {
+    var temp = JSON.parse(data);
+    var mobile=temp.userid[0].mobile; 
+    var username = temp.userid[0].name;
+    localStorage.setItem("userid",username);
+    localStorage.setItem("mobile",mobile);
+  
+    } );
+};
+
 
 function extension(data){
   chrome.extension.sendMessage({ directive: "popup-click" }, function(response) {
