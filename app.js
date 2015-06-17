@@ -58,8 +58,6 @@ io.on('connection', function(socket){
   // getInfo()-> mothership (nos){} || if nos is "12239" json {username: nos: details: } send json
   // promise after call
   
-  //io.emit('call','SS');  
-
 });
 
 

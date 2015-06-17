@@ -29,15 +29,20 @@ var Exotel = (function(superClass) {
   Exotel.prototype.parseCall = function(body, query) {
 
     console.log('query' + JSON.stringify(query));
-         
-  	if(query.CallSid && query.CallFrom && query.DialWhomNumber && query.CallStatus) {
-      //callsid needs to be unique for the notification to be sent to the browser
-      
 
-      if(query.CallFrom=='7829721707')
-      io.in('7829721707').emit('call',query.CallFrom);
-      else 
-      io.in('0000000000').emit('call',query.CallFrom);
+         // io.emit('call','r8375835');  
+  	if(query.CallSid && query.CallFrom && query.DialWhomNumber && query.Status) {
+      //callsid needs to be unique for the notification to be sent to the browser
+        
+      //console.log(typeof(query.CallFrom));
+
+      io.emit('call',query.CallFrom);  
+
+      //if(query.CallFrom=='07829721707')
+        //io.in('07829721707').
+      
+      //else
+        //io.in('0000000000').emit('call',query.CallFrom);
           
   		return {
   			callId: query.CallSid,
@@ -45,10 +50,10 @@ var Exotel = (function(superClass) {
           phone: query.CallFrom
         },
   			agent: {
-          phone: query.CallTo
+          phone: query.DialWhomNumber
         }
 
-  		};}
+  		} ;}
   	 else {
   		throw new Error("Expecting CallSid, From, DialWhomNumber and Status in query params");
   	}

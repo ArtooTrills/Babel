@@ -25,14 +25,3 @@ var jsonInput = request('https://api.artoo.in/ujjivan/users?access_token=824884e
 
 
 
-
-
-
-// //console.log(Input);
-// console.log(typeof(jsonInput));
-// console.log(jsonInput);
-//console.log(Object.keys(Input).length);
-// for(i=0;i<Input.length;i++)
-// if(Input.hasOwnProperty('mobile') && Input.mobile==mNumber){
-// 	console.log(Input);
-// }

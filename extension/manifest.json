@@ -7,7 +7,7 @@
         "default_popup": "popup.html"
     },
     "background": {
-        "scripts": ["background.js","jquery-latest.min.js","socket.io.js","popupwindow.js"]
+        "scripts": ["jquery-latest.min.js","socket.io.js","background.js","popup.js"]
         // dont remove the socket import from the above line 
     },
     "content_scripts": [

@@ -1,19 +1,46 @@
-<html>
+<html style="min-width:200px;">
     <head>
-        <!-- <script src="popup.js"></script> -->
-        <style type="text/css" media="screen">
-            body { min-width:250px; text-align: center; }
-            #click-me { font-size: 20px; }
-
-        </style>
-        <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
-        <!-- <script src="http://localhost:3000"></script> -->
-        <!-- <script src="http://code.jquery.com/jquery-1.11.1.js"></script> -->
-        <script type="text/javascript" src="popup.js"></script>
+        
     </head>
     <body>
-        <input id="messages" type="text" name="messages" readonly>
-        <button id='click-me' onclick="clickHandler()">Click me </button>
-        <ul id="messages"></ul>        
+        <script type="text/javascript" src="jquery-latest.min.js"></script>
+        <script type="text/javascript" src="socket.io.js"></script>
+        <script type="text/javascript" src="popup.js"></script>  
+
+
+        <button id='create_ticket' >Create Ticket </button>
+        <button id='update_ticket' >Update Ticket </button>
+
+        
+
+    <form id="form" style="display:none;">
+            <div>
+            <text id='name' readonly>Name : </text>
+            <input id='nameInput' type="text">
+            </div>
+            <div>
+            <text id='mobile' readonly>Mobile : </text>
+            <input id='mobileInput' type="text">
+            </div>
+            <div>
+            <text id='email' readonly>Email : </text>
+            <input id='emailInput' type="text">
+            </div>
+            <div>
+            <text id='description' readonly>Subject : </text>
+            <input id='descInput' type="text">
+            </div>
+            <div>
+            <text id='priority' readonly>Priority : </text>
+            <input id='prioInput' type="text">
+            </div> 
+
+            <button id="submit" onclick="alert('hi')">Submit</button>
+            <button id="cancel" >Cancel</button>
+    </form> 
+
+    <div id="append"></div>   
+
+
     </body>
 </html>
