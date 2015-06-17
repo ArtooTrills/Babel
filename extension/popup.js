@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
+      recentTickets();
       saveUserId();
       createConn();
-      recentTickets();
+      
       $("#create_ticket").on('click',function(){
       document.getElementById("form").style.display="block";
       }); 
@@ -13,15 +14,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function show()
-{alert(document.getElementById('name').value);}
+{}
 
 function createTicket()
 {     
-
+      alert(document.getElementById('name').value);
 
       var data ;
       data = {"description":"Details about the issue...","subject":"Support Needed...","email":"tom@outerspace.com","phone":"58348758345","name":"partha","priority":1,"status":2};
-
+      document.getElementById('loading').style.display="none";
       console.log(data);
       var xhr = new XMLHttpRequest();
       var url = "http://localhost:3000/tickets/freshdesk";
@@ -45,12 +46,13 @@ function recentTickets(){
         var i=0;
 
         $.getJSON("https://artoo.freshdesk.com/helpdesk/tickets.json?email=tom@outerspace.com&filter_name=all_tickets", function(data){
+        
         for(i=0;i<5;i++){
-              var html="<div><a href=" + prepUrl + data[i].display_id + " target=\"_blank\">" + data[i].subject + "</a></div>";
+              var html="<div>" + "[" + (i+1) + "] <a href=" + prepUrl + data[i].display_id + " target=\"_blank\">" + data[i].subject + "</a></div>";
               console.log(html)
               $("#append").append(html); 
   
-          } );
+          }} );
 
 
 
