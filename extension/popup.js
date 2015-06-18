@@ -1,27 +1,43 @@
+var mobile,username;
+var incomingNumber;
+
+
 document.addEventListener('DOMContentLoaded', function () {
-      recentTickets();
       saveUserId();
+      recentTickets();
+      
       createConn();
       
       $("#create_ticket").on('click',function(){
       document.getElementById("form").style.display="block";
       }); 
 
-      
-    
+                     
+      $('#form').submit(function () {
+        createTicket();
+      return false;
+      });   
+          
 });
 
 
-
-function show()
-{}
 
 function createTicket()
 {     
       alert(document.getElementById('name').value);
 
       var data ;
-      data = {"description":"Details about the issue...","subject":"Support Needed...","email":"tom@outerspace.com","phone":"58348758345","name":"partha","priority":1,"status":2};
+
+      var phone = document.getElementById('mobile').value;
+      var name = document.getElementById('nameInput').value;
+
+      data = {"description":document.getElementById('nameInput').value,
+              "subject":document.getElementById('subInput').value,
+              "email":document.getElementById('emailInput').value,
+              "priority":document.getElementById('prioInput').value,
+              "status":2}; //status is 2 for open tickets 
+
+
       document.getElementById('loading').style.display="none";
       console.log(data);
       var xhr = new XMLHttpRequest();
@@ -62,8 +78,8 @@ function recentTickets(){
 function saveUserId(){
     $.get('userID.json', function(data) {
     var temp = JSON.parse(data);
-    var mobile=temp.userid[0].mobile; 
-    var username = temp.userid[0].name;
+    mobile=temp.userid[0].mobile; 
+    username = temp.userid[0].name;
     console.log(username + mobile);
     localStorage.setItem("userid",username);
     localStorage.setItem("mobile",mobile);
@@ -113,6 +129,8 @@ function createConn()
 
 
 function extension(data){
+
+  incomingNumber=data;
 
   // alert("notification called");
   chrome.extension.sendMessage({ directive: "popup-click" }, function(response) {

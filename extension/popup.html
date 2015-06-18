@@ -1,4 +1,4 @@
-<html style="min-width:200px;">
+<html style="min-width:300px;">
     <head>
         
     </head>
@@ -10,10 +10,10 @@
 
         <button id='create_ticket' >Create Ticket </button>
         <button id='update_ticket' >Update Ticket </button>
-
+      
         
 
-    <form id="form" style="display:none;">
+    <form id="form" style="display:none;" name="form">
             <div>
             <text id='name' readonly>Name : </text>
             <input id='nameInput' type="text">
@@ -27,7 +27,11 @@
             <input id='emailInput' type="text">
             </div>
             <div>
-            <text id='description' readonly>Subject : </text>
+            <text id='sub' readonly>Subject : </text>
+            <input id='subInput' type="text">
+            </div>
+            <div>
+            <text id='desc' readonly>Description : </text>
             <input id='descInput' type="text">
             </div>
             <div>
@@ -35,8 +39,8 @@
             <input id='prioInput' type="text">
             </div> 
 
-            <button id="submit" onclick="alert('hi')">Submit</button>
-            <button id="cancel" >Cancel</button>
+            <input type="submit" value="Submit">
+            <input type="button" value="Cancel" />
     </form> 
     <div>
     </div>
