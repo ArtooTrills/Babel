@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }); 
 
       $("#cancel").on('click',function(){
-      document.getElementById("form").style.display="none";
+      document.getElementById("form").style.display="none ";
       });
 
                    
@@ -34,18 +34,24 @@ function createTicket()
       
 
       var data ;
+      var table=document.getElementById("table");
 
-      var phone = document.getElementById('mobile').value;
-      var name = document.getElementById('nameInput').value;
+
+      var name = table.rows[0].cells[1].children[0].value;
+      var mobile = table.rows[1].cells[1].children[0].value;
 
       var e = document.getElementById("prioInput");
+      var selected=e.options[e.selectedIndex].text;
+      
 
-      data = {"description":document.getElementById('nameInput').value,
-              "subject":document.getElementById('subInput').value,
-              "email":document.getElementById('emailInput').value,
-              "priority":e.options[e.selectedIndex].value,
+
+      data = {"description":table.rows[4].cells[1].children[0].value,
+              "subject":table.rows[3].cells[1].children[0].value,
+              "email":table.rows[2].cells[1].children[0].value,
+              "priority":selected,
               "status":2}; //status is 2 for open tickets 
 
+      alert(selected);
 
       //document.getElementById('loading').style.display="none";
       console.log(data);
@@ -56,8 +62,7 @@ function createTicket()
 
       // send the collected data as JSON
       var response = xhr.send(JSON.stringify(data));
-      //console.log(JSON.stringify(data));
-
+      
       return response ;
 
 };
