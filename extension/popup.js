@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById("form").style.display="block";
       }); 
 
+      $("#cancel").on('click',function(){
+      document.getElementById("form").style.display="none";
+      });
+
                    
       $('#form').submit(function () {
         createTicket();
