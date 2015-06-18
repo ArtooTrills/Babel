@@ -12,11 +12,14 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById("form").style.display="block";
       }); 
 
-                     
+                   
       $('#form').submit(function () {
         createTicket();
-      return false;
-      });   
+        return false;
+      });
+      
+
+       
           
 });
 
@@ -24,21 +27,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function createTicket()
 {     
-      alert(document.getElementById('name').value);
+      
 
       var data ;
 
       var phone = document.getElementById('mobile').value;
       var name = document.getElementById('nameInput').value;
 
+      var e = document.getElementById("prioInput");
+
       data = {"description":document.getElementById('nameInput').value,
               "subject":document.getElementById('subInput').value,
               "email":document.getElementById('emailInput').value,
-              "priority":document.getElementById('prioInput').value,
+              "priority":e.options[e.selectedIndex].value,
               "status":2}; //status is 2 for open tickets 
 
 
-      document.getElementById('loading').style.display="none";
+      //document.getElementById('loading').style.display="none";
       console.log(data);
       var xhr = new XMLHttpRequest();
       var url = "http://localhost:3000/tickets/freshdesk";
@@ -47,9 +52,8 @@ function createTicket()
 
       // send the collected data as JSON
       var response = xhr.send(JSON.stringify(data));
-      console.log(JSON.stringify(data));
+      //console.log(JSON.stringify(data));
 
-      console.log(response);
       return response ;
 
 };
