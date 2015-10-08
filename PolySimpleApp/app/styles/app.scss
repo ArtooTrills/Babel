@@ -1,0 +1,22 @@
+@import '_color-definitions';
+$color-primary: $palette-blue-500;
+$color-accent: $palette-pink-A200;
+@import 'material-design-lite';
+
+html,body {
+	width: 600px;
+	height: 100%;
+	min-height: 600px;
+}
+
+.mdl-layout-spacer {
+    display: none;
+ }
+
+ .mdl-layout--large-screen-only {
+ 	display: "";
+ }
+
+ .mdl-layout.is-small-screen .mdl-layout--large-screen-only {
+ 	display: "";
+ }

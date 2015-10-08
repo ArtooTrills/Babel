@@ -1,0 +1,15 @@
+{{#each model as |call index|}}
+	{{#mdl-card title=call.user.name class="mdl-cell mdl-cell--12-col"}}
+	  <div class="mdl-card__supporting-text">	  	
+	  </div>
+	  {{#mdl-card-actions}}
+	  	{{mdl-button text=call.user.org}}	  	
+	  	<a href={{call.url}}>call #</a>
+	  {{/mdl-card-actions}}
+	  {{#mdl-card-buttons}}	    
+	  	<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-button--colored ember-view" {{action "createTicket" call}}>	    
+	  		<icon class="icon material-icons">add</icon>
+		</button>	    	    
+	  {{/mdl-card-buttons}}
+	{{/mdl-card}}
+{{/each}}

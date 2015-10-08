@@ -1,0 +1,10 @@
+{{#mdl-card title=ticket.title class="mdl-cell mdl-cell--12-col"}}
+  <div class="mdl-card__supporting-text">
+    {{mdl-textfield label='Title' value=model.title class="mdl-cell mdl-cell--12-col"}}
+    {{mdl-textarea label='Message' value=model.message class="mdl-cell mdl-cell--12-col"}}
+    {{mdl-textfield label='Tags' value=model.tags class="mdl-cell mdl-cell--12-col"}}
+
+    {{#mdl-button action="save" isRaised=true}}Save{{/mdl-button}}
+    {{#mdl-button action="cancel" isRaised=true isAccent=true}}Cancel{{/mdl-button}}
+  </div>  
+{{/mdl-card}}

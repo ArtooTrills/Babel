@@ -1,0 +1,24 @@
+{{#each model as |ticket|}}
+	{{#mdl-card title=ticket.title class="mdl-cell mdl-cell--12-col"}}
+	  <div class="mdl-card__supporting-text">
+	  	<icon class="icon material-icons">business</icon> Ujjivan<br />
+	  	<icon class="icon material-icons">face</icon> Kaushik Bhat<br />
+	  	<ul>
+	  		<li>Roles: </li>
+	  		<li>Contexts: </li>
+	  	</ul>
+	  	{{ticket.message}} <br />	  	
+	  </div>
+	  {{#mdl-card-actions}}
+	  	{{#each ticket.tags as |tag|}}
+	  		{{mdl-button text=tag}}
+	  	{{/each}}
+	  	<a href="https://artooin.freshdesk.com/...">Ticket #</a>
+	  {{/mdl-card-actions}}
+	  {{#mdl-card-buttons}}	    
+	    {{#link-to "tickets.ticket" ticket tagName="button" class="ember-view mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-button--colored"}}
+	    <icon class="icon material-icons">edit</icon>
+	    {{/link-to}}
+	  {{/mdl-card-buttons}}
+	{{/mdl-card}}
+{{/each}}
