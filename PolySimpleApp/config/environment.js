@@ -21,9 +21,6 @@ module.exports = function(environment) {
       'style-src': "'self' fonts.googleapis.com",
       // 'frame-src': "s-static.ak.facebook.com static.ak.facebook.com www.facebook.com"
     },
-    sassOptions: {
-      includePaths: ['bower_components/material-design-lite/src']
-    },
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
